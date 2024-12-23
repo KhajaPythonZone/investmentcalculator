@@ -3,11 +3,12 @@ investment.py
 
 This module contains the base implementation of investment
 """
+
 from calculator.investments.exceptions import (
     InvalidInvestmentType,
     InvalidInvestmentTime,
     InvalidInvestmentReturns,
-    InvalidInvestmentAmount
+    InvalidInvestmentAmount,
 )
 
 
@@ -29,14 +30,12 @@ class Investment:
 
     @property
     def investment_type(self) -> str:
-        """This property gets the investment type
-        """
+        """This property gets the investment type"""
         return self._investment_type
 
     @investment_type.setter
     def investment_type(self, value) -> None:
-        if value in ['Monthly', 'Yearly']:
-            self._investment_type = value
+        self._investment_type = value
 
     @property
     def amount(self) -> float:
@@ -62,7 +61,7 @@ class Investment:
             int: time in years
         """
         return self._time
-    
+
     def validate(self) -> bool:
         """
         This method validates investments
@@ -75,7 +74,7 @@ class Investment:
             InvalidInvestemtRate
             InvalidInvestemtTime
         """
-        if self.investment_type not in ['Monthly', 'Yearly']:
+        if self.investment_type not in ["Monthly", "Yearly"]:
             raise InvalidInvestmentType
         if self.amount <= 0:
             raise InvalidInvestmentAmount
@@ -83,7 +82,6 @@ class Investment:
             raise InvalidInvestmentReturns
         if self.time <= 0:
             raise InvalidInvestmentTime
-
 
     def calculate(self) -> float:
         """This method will return the total value
